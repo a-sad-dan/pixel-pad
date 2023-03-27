@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+    font-family: "Barrio";
+    font-weight: 100;
+    /* margin: 10px; */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: cen;
+}
+
+#page-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 0 2em 0 2em;
+    width: 90%;
+    justify-content: space-evenly;
+}
+
+#aside {
+    /* height: 640px; */
+    width: 100%;
+    min-width: 400px;
+    max-width: 450px;
+    display: flex;
+    flex-flow: column;
+
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#underline {
+    width: 50%;
+    height: 2px;
+    background-color: #1e1e1e;
+    margin: 0 auto;
+    margin-bottom: 1.5em;
+    margin-top: -1.5em;
+    transform: rotate(-2.6deg);
+    translate: 0.5em 0;
+
+}
+
+#control-area {
+    height: 100%;
+    border: 2px solid #1e1e1e;
+}
+
+#pad {
+    width: 640px;
+    height: 640px;
+    background-color: #ececec;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 2px solid #1e1e1e;
+}
+
+#pad>div {
+    width: 60px;
+    height: 60px;
+    background-color: purple;
+    border: 1px solid #1e1e1e;
+
+}
+
+
+#link {
+    writing-mode: sideways-lr;
+    /* border: 1px solid #1e1e1e; */
+    padding: 1.2em 0.2em;
+    background-color: #d8d8d8;
+    /* To change the flex order */
+    order: -1;
+}
+
+#link:hover {
+    box-shadow: -0.2em 0.2em 0.3em #a1a1a1;
+}
+
+#link>a {
+    font-size: 2.2em;
+    text-decoration: unset;
+    color: unset;
+}
