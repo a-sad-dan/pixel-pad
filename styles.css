@@ -8,13 +8,22 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: cen;
 }
 
 #page-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#main-area {
+
+    /* Putting the area in the center */
+
+    margin: auto;
     display: flex;
     flex-direction: row;
     margin: 0 2em 0 2em;
@@ -77,12 +86,14 @@ h1 {
     /* border: 1px solid #1e1e1e; */
     padding: 1.2em 0.2em;
     background-color: #d8d8d8;
-    /* To change the flex order */
-    order: -1;
+    position: fixed;
+    top: 50%;
+    transform: translate(0, -50%);
+
 }
 
 #link:hover {
-    box-shadow: -0.2em 0.2em 0.3em #a1a1a1;
+    box-shadow: 0.2em -0.2em 0.3em #a1a1a1 inset;
 }
 
 #link>a {
@@ -90,3 +101,33 @@ h1 {
     text-decoration: unset;
     color: unset;
 }
+
+/*                          My OWn MEDIA Queries */
+@media (max-width : 1262px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    #link {
+        align-self: flex-end;
+        text-align: center;
+        height: 1em;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        margin-bottom: 0;
+        transform: unset;
+        padding: 1.6em 0.2em;
+    }
+
+    #link>a {
+        writing-mode: horizontal-tb;
+        transform: translate(-50%, 50%);
+        position: relative;
+        left: 50%;
+    }
+
+    #link:hover {
+        box-shadow: 0.2em 0.2em 0.3em #a1a1a1 inset;
+    }
