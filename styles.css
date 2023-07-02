@@ -48,38 +48,121 @@ h1 {
 
 #underline {
     width: 50%;
-    height: 2px;
+    height: 3px;
     background-color: #1e1e1e;
     margin: 0 auto;
     margin-bottom: 1.5em;
     margin-top: -1.5em;
     transform: rotate(-2.6deg);
     translate: 0.5em 0;
-
 }
 
 #control-area {
     height: 100%;
-    border: 2px solid #1e1e1e;
+    border: 1px solid #ececec;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.6em;
+    box-shadow: 0.2em 0.3em 0.3em #d8d8d8;
+}
+
+#control-area>* {
+    width: 60%;
+}
+
+button {
+    transition: box-shadow 0.12s;
+    font-size: 1.2em;
+    font-weight: 500;
+    border: unset;
+    padding: 0.3em 0.2em;
+    border-radius: 2px;
+}
+
+button:hover {
+    background-color: #f3f3f3;
+    /* box-shadow: 0.1em -0.1em 0.2em #a1a1a1 ; */
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 0.1em -0.1em 0.2em #a1a1a1 inset;
+}
+
+
+.toggled {
+    box-shadow: 0.1em -0.1em 0.2em #a1a1a1 inset;
+    /* box-shadow: #a1a1a1 0.1em 0.1em 0.3em; */
+    filter: grayscale(0%) !important; 
+}
+
+.row {
+    width: 60%;
+}
+
+#lighten,
+#darken {
+    width: 50%;
+}
+
+#pen,
+#eraser {
+    float: right;
+    padding: 0.3em 0.6em;
+}
+
+#sizeOut>p {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 0.6em;
+}
+
+#sizeOut>p:nth-child(1) {
+    width: 49%;
+    text-align: left;
+    margin: 0;
+    letter-spacing: 0.1em;
+}
+
+#grid_size {
+    width: 49%;
+    margin: 0;
+    text-align: right;
+    letter-spacing: 0.2em;
+}
+
+#count {
+    width: 100%;
+    background-color: purple;
 }
 
 #pad {
-    width: 640px;
-    height: 640px;
+    width: 660px;
+    height: 660px;
     background-color: #ececec;
     flex-grow: 0;
     flex-shrink: 0;
-    border: 2px solid #1e1e1e;
+    box-shadow: 0.2em 0.2em 0.25em #d8d8d8;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
 }
 
-#pad>div {
-    width: 60px;
-    height: 60px;
-    background-color: purple;
-    border: 1px solid #1e1e1e;
-
+.pixel {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid #a1a1a1;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    filter: brightness(100%);
 }
 
+.no-border {
+    border: unset;
+}
 
 #link {
     writing-mode: sideways-lr;
@@ -93,6 +176,7 @@ h1 {
 }
 
 #link:hover {
+    background-color: #f3f3f3;
     box-shadow: 0.2em -0.2em 0.3em #a1a1a1 inset;
 }
 
@@ -100,6 +184,57 @@ h1 {
     font-size: 2.2em;
     text-decoration: unset;
     color: unset;
+}
+
+/*              CUSTOMISING THE INPUTS                */
+input[type="range"] {
+    height: 1px;
+}
+
+input[type="range"]:hover {
+    height: 2px;
+    cursor: pointer;
+}
+
+input[type="color"] {
+    height: 5em;
+    border: unset;
+    cursor: pointer;
+    background-color: transparent;
+    box-shadow: 0.2em 0.2em 0.3em #ececec;
+}
+
+input[type="color"]:hover {
+    box-shadow: 0.2em 0.2em 0.3em #a1a1a1;
+}
+
+
+
+/* To remove the clickable and draggable as it interferes with the paint */
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.button-icon {
+    height: 34px;
+    padding: 0;
+    filter: grayscale(100%);
+    transition: filter(0.12s);
+}
+
+.button-img {
+    height: 100%;
+    object-fit: contain;
+}
+
+.button-icon:hover {
+    filter:grayscale(50%);   
 }
 
 /*                          My OWn MEDIA Queries */
@@ -131,3 +266,16 @@ h1 {
     #link:hover {
         box-shadow: 0.2em 0.2em 0.3em #a1a1a1 inset;
     }
+
+
+
+
+
+    /* NOTE TO SELF AAAHJDGJHASVKJHAVFV */
+    /* 
+    1. increase the font of the control area elements
+    2. adjust height of elemtents in the control area- Do not touch the gap property
+    3. Add style to the card like the links (subtle and clean) and remove the rounding
+    
+    */
+}
