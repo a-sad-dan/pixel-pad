@@ -17,7 +17,7 @@
 
         <div id="main-area">
 
-            <div id="aside"  >
+            <div id="aside">
                 <div id="main-heading">
                     <h1>Pixel Pad</h1>
                     <div id="underline"></div>
@@ -25,23 +25,32 @@
                 <div id="control-area">
 
                     <button onclick="toggleRandomColor()" class="" id="random-color">Random Color</button>
-                    <dv id="row1" class = "row">
+                    <dv class="row">
                         <button onclick="toggleLighten()" class="" id="lighten">Lighten</button>
-                        <button class="toggled button-icon" id="pen" onclick="togglePen()"><img class = "button-img"src="Assets/pencil.png" alt="pencil"></button>
+                        <button class="toggled button-icon" id="pen" onclick="togglePen()"><img class="button-img"
+                                src="Assets/pencil.png" alt="pencil"></button>
                     </dv>
-                    <div id="row2" class = "row">
+                    <div class="row">
                         <button onclick="toggleDarken()" id="darken">Darken</button>
-                        <button class="button-icon" id="eraser" onclick="toggleEraser()"><img class = "button-img" src="Assets/eraser.png" alt="eraser"></button>
+                        <button class="button-icon" id="eraser" onclick="toggleEraser()"><img class="button-img"
+                                src="Assets/eraser.png" alt="eraser"></button>
                     </div>
-                    <button class="" onclick="clearCanvas()">Clear Canvas</button>
-                    <button onclick="toggleGrid()"> Toggle Grid</button>
+                    <div class="row">
+                        <button class="padded-btn" onclick="clearCanvas()">Clear Canvas</button>
+                        <button class="padded-btn" onclick="toggleGrid()"> Gridlines</button>
+                    </div>
+
+                    <div class="row">
+                        <p class='inline'>Canvas Color</p>
+                        <input type="color" id="canvas-color">
+                    </div>
 
                     <div id="slider">
                         <div id="sizeOut">
                             <p>Grid Size : </p>
                             <p id="grid_size"></p>
                         </div>
-                        
+
                         <input type="range" class="slider-style" id="count" name="count" min="10" max="100">
                     </div>
                     <input type="color" name="SelectedColor" id="colorInput">

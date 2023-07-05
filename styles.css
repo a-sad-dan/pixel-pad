@@ -64,7 +64,7 @@ h1 {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 1.6em;
+    gap: 24px;
     box-shadow: 0.2em 0.3em 0.3em #d8d8d8;
 }
 
@@ -95,11 +95,14 @@ button:active {
 .toggled {
     box-shadow: 0.1em -0.1em 0.2em #a1a1a1 inset;
     /* box-shadow: #a1a1a1 0.1em 0.1em 0.3em; */
-    filter: grayscale(0%) !important; 
+    filter: grayscale(0%) !important;
 }
 
 .row {
     width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #lighten,
@@ -208,7 +211,13 @@ input[type="color"]:hover {
     box-shadow: 0.2em 0.2em 0.3em #a1a1a1;
 }
 
+.padded-btn {
+    padding: 7px 12px;
+}
 
+#canvas-color {
+    height: 45px;
+}
 
 /* To remove the clickable and draggable as it interferes with the paint */
 
@@ -234,7 +243,11 @@ input[type="color"]:hover {
 }
 
 .button-icon:hover {
-    filter:grayscale(50%);   
+    filter: grayscale(50%);
+}
+
+.inline {
+    display: inline;
 }
 
 /*                          My OWn MEDIA Queries */
@@ -264,7 +277,7 @@ input[type="color"]:hover {
     }
 
     #link:hover {
-        box-shadow: 0.2em 0.2em 0.3em #a1a1a1 ;
+        box-shadow: 0.2em 0.2em 0.3em #a1a1a1;
     }
 
 

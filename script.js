@@ -10,6 +10,7 @@ function updateGridSizeText() {
     gridSizeOutput.textContent = `${slider.value} X ${slider.value}`;
 };
 
+let canvasColor = '';
 let selectedColor = '';
 let isLightenToggled = 0;
 let isDarkenToggled = 0;
@@ -28,14 +29,11 @@ function toggleGrid() {
         }
         isGridToggled = 0;
     }
-    else if (isGridToggled == 0) {
+    else {
         for (let i = 0; i < pixels.length; i++) {
             pixels[i].classList.remove('no-border');
         }
         isGridToggled = 1;
-    }
-    else {
-        console.log('else taken');
     }
 }
 
@@ -49,9 +47,9 @@ function updatePad() {
     for (let i = 0; i < numPixels ** 2; i++) {
         const pixel = document.createElement('div');
         pixel.classList.add('pixel');
+        pixel.classList.add('canvas');
         if (isGridToggled == 0) {
             pixel.classList.add("no-border");
-
         }
         pixel.style.filter = 'brightness(100%)';
         const pixelSide = 660 / numPixels;
@@ -66,9 +64,11 @@ function updatePad() {
             if (event.buttons) {
                 if (isPenToggled == 1) {
                     pixels[i].style.backgroundColor = `${selectedColor}`;
+                    selectColor();
+                    pixels[i].classList.remove("canvas");
                 }
                 if (isEraserToggled == 1) {
-                    pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+                    pixels[i].style.backgroundColor = `${canvasColor}`;
                 }
                 if (isDarkenToggled == 1) {
                     let currentBrightness = matchValue(pixels[i].style.filter)
@@ -85,10 +85,11 @@ function updatePad() {
         pixels[i].addEventListener("mousedown", function () {
             if (isPenToggled == 1) {
                 pixels[i].style.backgroundColor = `${selectedColor}`;
-                console.log('pen is on and working');
+                selectColor();
+                pixels[i].classList.remove("canvas");
             }
             if (isEraserToggled == 1) {
-                pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+                pixels[i].style.backgroundColor = `${canvasColor}`;
             }
             if (isDarkenToggled == 1) {
                 let currentBrightness = matchValue(pixels[i].style.filter)
@@ -101,10 +102,32 @@ function updatePad() {
                 pixels[i].style.filter = `brightness(${newBrightness}%)`;
             }
         });
+        pixels[i].addEventListener("mouseleave", function (event) {
+            if (event.buttons) {
+
+                if (isPenToggled == 1) {
+                    pixels[i].style.backgroundColor = `${selectedColor}`;
+                    selectColor();
+                    pixels[i].classList.remove("canvas");
+                }
+                if (isEraserToggled == 1) {
+                    pixels[i].style.backgroundColor = `${canvasColor}`;
+                }
+                if (isDarkenToggled == 1) {
+                    let currentBrightness = matchValue(pixels[i].style.filter)
+                    let newBrightness = currentBrightness - 10;
+                    pixels[i].style.filter = `brightness(${newBrightness}%)`;
+                }
+                if (isLightenToggled == 1) {
+                    let currentBrightness = matchValue(pixels[i].style.filter)
+                    let newBrightness = currentBrightness + 10;
+                    pixels[i].style.filter = `brightness(${newBrightness}%)`;
+                }
+            }
+        });
     };
-
-
 };
+
 
 
 // Function to match Regex to find the brightness value of a pixel
@@ -120,9 +143,9 @@ function matchValue(string) {
 for (let i = 0; i < 16 ** 2; i++) {
     const pixel = document.createElement('div');
     pixel.classList.add('pixel');
-
+    pixel.classList.add('canvas');
     pixel.style.filter = 'brightness(100%)';
-    pixel.backgroundColor = 'rgb(243, 243, 243)';
+    pixel.style.backgroundColor = 'rgb(243, 243, 243)';
     const pixelSide = pad.offsetWidth / 16;
     pixel.style.width = `${pixelSide}px`;
     pixel.style.height = `${pixelSide}px`;
@@ -156,10 +179,11 @@ for (let i = 0; i < pixels.length; i++) {
         if (event.buttons) {
             if (isPenToggled == 1) {
                 pixels[i].style.backgroundColor = `${selectedColor}`;
+                pixels[i].classList.remove("canvas");
                 selectColor();
             }
             if (isEraserToggled == 1) {
-                pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+                pixels[i].style.backgroundColor = `${canvasColor}`;
             }
             if (isDarkenToggled == 1) {
                 let currentBrightness = matchValue(pixels[i].style.filter)
@@ -177,10 +201,11 @@ for (let i = 0; i < pixels.length; i++) {
         if (event.buttons) {
             if (isPenToggled == 1) {
                 pixels[i].style.backgroundColor = `${selectedColor}`;
+                pixels[i].classList.remove("canvas");
                 selectColor();
             }
             if (isEraserToggled == 1) {
-                pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+                pixels[i].style.backgroundColor = `${canvasColor}`;
             }
             if (isDarkenToggled == 1) {
                 let currentBrightness = matchValue(pixels[i].style.filter)
@@ -197,11 +222,11 @@ for (let i = 0; i < pixels.length; i++) {
     pixels[i].addEventListener("mousedown", function () {
         if (isPenToggled == 1) {
             pixels[i].style.backgroundColor = `${selectedColor}`;
+            pixels[i].classList.remove("canvas");
             selectColor();
-            console.log('pen is on and working');
         }
         if (isEraserToggled == 1) {
-            pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+            pixels[i].style.backgroundColor = `${canvasColor}`;
         }
         if (isDarkenToggled == 1) {
             let currentBrightness = matchValue(pixels[i].style.filter)
@@ -330,14 +355,35 @@ function clearCanvas() {
     const pixels = document.querySelectorAll('.pixel');
     for (let i = 0; i < pixels.length; i++) {
         pixels[i].style.backgroundColor = "unset";
+        pixels[i].classList.add('canvas');
 
     }
 };
 
 
 
+// Adding event listeners
+
+document.querySelector('#canvas-color').addEventListener('input', () => changeCanvasColor());
+let canvas = document.getElementsByClassName('canvas');
+
+// Changing the Pixels which are part of the canvas and changing their value
+function changeCanvasColor() {
+    let canvas = document.querySelectorAll('.canvas');
+    canvasColor = document.querySelector("#canvas-color").value;
+    for (let i = 0; i < canvas.length; i++) {
+        canvas[i].style.backgroundColor = `${canvasColor}`;
+    }
+    console.log('treid to change bg color')
+}
+
+
+
 // NOte to self
 // UPDATE TOGGLE FOR eraser and pen
 
+// Refactor the Code and make functions for repeated code base
+// Add relevant comments for each function
+// Try removing canvas class from the darkened/lightened pixels
 
 
