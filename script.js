@@ -13,7 +13,7 @@ function updateGridSizeText() {
 let selectedColor = '';
 let isLightenToggled = 0;
 let isDarkenToggled = 0;
-let isRandomColorOn = 0;
+let isRandomColorToggled = 0;
 
 const colorInput = document.getElementById('colorInput');
 selectedColor = colorInput.value;
@@ -156,6 +156,28 @@ for (let i = 0; i < pixels.length; i++) {
         if (event.buttons) {
             if (isPenToggled == 1) {
                 pixels[i].style.backgroundColor = `${selectedColor}`;
+                selectColor();
+            }
+            if (isEraserToggled == 1) {
+                pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
+            }
+            if (isDarkenToggled == 1) {
+                let currentBrightness = matchValue(pixels[i].style.filter)
+                let newBrightness = currentBrightness - 10;
+                pixels[i].style.filter = `brightness(${newBrightness}%)`;
+            }
+            if (isLightenToggled == 1) {
+                let currentBrightness = matchValue(pixels[i].style.filter)
+                let newBrightness = currentBrightness + 10;
+                pixels[i].style.filter = `brightness(${newBrightness}%)`;
+            }
+        };
+    });
+    pixels[i].addEventListener("mouseleave", function (event) {
+        if (event.buttons) {
+            if (isPenToggled == 1) {
+                pixels[i].style.backgroundColor = `${selectedColor}`;
+                selectColor();
             }
             if (isEraserToggled == 1) {
                 pixels[i].style.backgroundColor = `rgb(243, 243, 243)`;
@@ -175,6 +197,7 @@ for (let i = 0; i < pixels.length; i++) {
     pixels[i].addEventListener("mousedown", function () {
         if (isPenToggled == 1) {
             pixels[i].style.backgroundColor = `${selectedColor}`;
+            selectColor();
             console.log('pen is on and working');
         }
         if (isEraserToggled == 1) {
@@ -274,11 +297,35 @@ function toggleLighten() {
     }
 }
 
-// To take input color of pen
-addEventListener('input', function () {
-    selectedColor = colorInput.value;
-});
+let randomColor = document.querySelector('#random-color');
+function toggleRandomColor() {
+    if (isRandomColorToggled == 1) {
+        randomColor.classList.remove('toggled');
+        isRandomColorToggled = 0;
+    }
+    else {
+        isRandomColorToggled = 1;
+        randomColor.classList.add('toggled');
+    }
+}
 
+function getRandomRGBValue() {
+    const value = Math.floor(Math.random() * 255);
+    return value;
+}
+
+function selectColor() {
+
+    if (isRandomColorToggled == 1) {
+        selectedColor = `rgb(${getRandomRGBValue()},${getRandomRGBValue()},${getRandomRGBValue()})`
+    }
+    else {
+        colorInput.addEventListener('input', function () {
+            selectedColor = colorInput.value;
+        });
+        selectedColor = colorInput.value;
+    }
+}
 function clearCanvas() {
     const pixels = document.querySelectorAll('.pixel');
     for (let i = 0; i < pixels.length; i++) {

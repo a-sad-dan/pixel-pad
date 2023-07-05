@@ -264,7 +264,7 @@ input[type="color"]:hover {
     }
 
     #link:hover {
-        box-shadow: 0.2em 0.2em 0.3em #a1a1a1 inset;
+        box-shadow: 0.2em 0.2em 0.3em #a1a1a1 ;
     }
 
 
