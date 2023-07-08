@@ -384,6 +384,7 @@ function changeCanvasColor() {
 
 // Refactor the Code and make functions for repeated code base
 // Add relevant comments for each function
-// Try removing canvas class from the darkened/lightened pixels
+// Try removing canvas class from the darkened/lightened pixels 
+// Fix the repeated gridlines using JS and Also make sure the grid color is always contrasting the bg color
 
 
